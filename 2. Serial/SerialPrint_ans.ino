@@ -16,7 +16,7 @@ void setup() {
   Serial.begin(9600);
 }
 
-// 主函式，會不斷重複執行
+// 迴圈函式，會不斷重複執行
 void loop() {
   // 2. 序列埠印出字串並換行
   digitalWrite(LED_BULTIN, HIGH);   // 輸出高電位的訊號到led接腳

@@ -2,7 +2,7 @@
  * 透過輸入訊息至序列埠來控制內建LED燈
  * **********************************/
 
-// 設定參數
+// 參數
 #define LED_BULTIN 2
 String data;
 
@@ -12,7 +12,7 @@ void setup(){
   Serial.begin(115200);
 }
 
-// 主函式，會不斷重複執行
+// 迴圈函式，會不斷重複執行
 void loop(){
   if(Serial.available() > 0){
     data = Serial.readString();
