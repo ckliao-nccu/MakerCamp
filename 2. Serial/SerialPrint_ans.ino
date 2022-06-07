@@ -7,22 +7,22 @@
 *****************/
 
 // 設定接腳編號
-int led = 2;
+#define LED_BULTIN 2
 
 // 設定函式，只會執行一次
 void setup() {
   // 1. 啟動序列埠通訊
-  pinMode(led, OUTPUT);
+  pinMode(LED_BULTIN, OUTPUT);
   Serial.begin(9600);
 }
 
 // 主函式，會不斷重複執行
 void loop() {
   // 2. 序列埠印出字串並換行
-  digitalWrite(led, HIGH);   // 輸出高電位的訊號到led接腳
+  digitalWrite(LED_BULTIN, HIGH);   // 輸出高電位的訊號到led接腳
   Serial.println("LED on.");
   delay(1000);               // 暫停程式執行一秒鐘
-  digitalWrite(led, LOW);    // 輸出低電位的訊號到led接腳
+  digitalWrite(LED_BULTIN, LOW);    // 輸出低電位的訊號到led接腳
   Serial.println("LED off.");
   delay(1000);               // 暫停程式執行一秒鐘
 }

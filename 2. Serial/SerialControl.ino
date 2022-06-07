@@ -3,12 +3,12 @@
  * **********************************/
 
 // 設定參數
-int led = 2;
+#define LED_BULTIN 2
 String data;
 
 // 設定函式，只會執行一次
 void setup(){
-  pinMode(led, OUTPUT);
+  pinMode(LED_BULTIN, OUTPUT);
   Serial.begin(115200);
 }
 
@@ -17,12 +17,12 @@ void loop(){
   if(Serial.available() > 0){
     data = Serial.readString();
     data.trim();
-    if(data = "On"){
-      digitalWrite(led, HIGH);
+    if(data == "On"){
+      digitalWrite(LED_BULTIN, HIGH);
       Serial.println("Lights on.");
     }
-    if(data = "Off"){
-      digitalWrite(led, Low);
+    if(data == "Off"){
+      digitalWrite(LED_BULTIN, LOW);
       Serial.println("Lights off.");
     }
   }
