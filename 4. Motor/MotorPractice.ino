@@ -4,6 +4,7 @@
 
 // 設定函式，只會執行一次
 void setup() {
+  // 馬達設為輸出模式
   pinMode(MOTOR_R1, OUTPUT);
   pinMode(MOTOR_R2, OUTPUT);
 }
