@@ -20,9 +20,9 @@ void setup(){
 // 迴圈函式，會不斷重複執行
 void loop(){
   Dabble.processInput();               // 3. 接收藍芽資料
-  if(isUpPressed()){
+  if(GamePad.isUpPressed()){
     goAhead();
-  } else if (isDownPressed()){
+  } else if (GamePad.isDownPressed()){
     goBack();
   } else {
     goStop();
