@@ -1,7 +1,7 @@
 #include <DabbleESP32.h>               // 1. 引入Dabble函式庫
 
 // 參數
-#define LED_BULTIN 2
+#define LED_BUILTIN 2
 #define MOTOR_R1 27                    // 右邊馬達的針腳
 #define MOTOR_R2 26
 #define MOTOR_L1 33                    // 左邊馬達的針腳
@@ -9,7 +9,7 @@
 
 // 設定函式，只會執行一次
 void setup(){
-  pinMode(LED_BULTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
   pinMode(MOTOR_R1, OUTPUT);           // 馬達設為輸出模式
   pinMode(MOTOR_R2, OUTPUT);
   pinMode(MOTOR_L1, OUTPUT);

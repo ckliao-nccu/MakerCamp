@@ -16,11 +16,11 @@
 #include <DabbleESP32.h> 
 
 // 參數
-#define LED_BULTIN 2
+#define LED_BUILTIN 2
 
 // 設定函式，只會執行一次
 void setup(){
-  pinMode(LED_BULTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
   Dabble.begin("Bluetooth_Name"); 
 }
 
