@@ -1,3 +1,4 @@
+// 引入函式庫
 #include <DabbleESP32.h>               // 1. 引入Dabble函式庫
 
 // 參數
