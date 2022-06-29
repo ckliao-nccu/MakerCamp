@@ -5,15 +5,13 @@
 // 參數
 #define LED_BUILTIN     2
 #define RST_PIN         15          
-#define SS_PIN          21  //就是模組上的SDA接腳
-byte uid[]={0x80, 0x3A, 0xFD, 0x22};  //許可的卡號
-//used in authentication
-MFRC522::MIFARE_Key key;
-//authentication return status code
-MFRC522::StatusCode status;
-// Defined pins to module RC522
-MFRC522 mfrc522(SS_PIN, RST_PIN); 
+#define SDA_PIN         21
 
+byte uid[]={0x80, 0x3A, 0xFD, 0x22};  //許可的卡號
+bool pass = true;
+
+// MFRC522模組連線設定
+MFRC522 mfrc522(SDA_PIN, RST_PIN); 
 
 // 設定函式，只會執行一次
 void setup() {
@@ -26,16 +24,16 @@ void setup() {
   mfrc522.PCD_DumpVersionToSerial(); // 顯示讀卡設備的版本
 }
 
-
 // 迴圈函式，會不斷重複執行
 void loop() {
   if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
     // 顯示卡片內容
+    pass = true;
     MFRC522::PICC_Type piccType = mfrc522.PICC_GetType(mfrc522.uid.sak);
-    bool pass = true;
     Serial.print(F("PICC type: "));
-    Serial.println(mfrc522.PICC_GetTypeName(piccType));  //顯示卡片的類型
+    Serial.println(mfrc522.PICC_GetTypeName(piccType));
     Serial.print(F("Card UID: "));
+    // 印出卡片ID
     for (int i = 0; i < mfrc522.uid.size; i++) {
       Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
       Serial.print(mfrc522.uid.uidByte[i], HEX);
@@ -43,6 +41,7 @@ void loop() {
         pass = false;
       }
     }
+    // 卡片ID符合才會印出pass並亮燈
     Serial.println();
     if(pass){
       Serial.println("Pass");
@@ -51,7 +50,8 @@ void loop() {
       Serial.println("Denied");
       digitalWrite(LED_BUILTIN, LOW);
     }
-    mfrc522.PICC_HaltA();  // instructs the PICC when in the ACTIVE state to go to a "STOP" state
-    mfrc522.PCD_StopCrypto1(); //"stop" the encryption of the PCD, it must be called after communication with authentication, otherwise new communications can not be initiated
+    // 暫停RFID模組，避免一瞬間不斷重複讀取同一張卡片
+    mfrc522.PICC_HaltA(); 
+    mfrc522.PCD_StopCrypto1();
   }
 }

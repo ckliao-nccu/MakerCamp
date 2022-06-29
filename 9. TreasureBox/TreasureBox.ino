@@ -4,13 +4,13 @@
 
 #define SERVO_PIN       12  //伺服馬達
 #define RST_PIN         15  //RST
-#define SS_PIN          21  //SDA
+#define SDA_PIN         21  //SDA
 #define R_Pin           33
 #define G_Pin           32
 #define B_Pin           25
 
 Servo servo1;  //伺服馬達名稱
-MFRC522 mfrc522(SS_PIN, RST_PIN);   //Defined pins to module RC522
+MFRC522 mfrc522(SDA_PIN, RST_PIN);   //Defined pins to module RC522
 
 int angle_engage = 20;
 int angle_disengage = 0;
@@ -30,7 +30,7 @@ void setup() {
     Serial.print("Reader: ");
     mfrc522.PCD_DumpVersionToSerial();  //顯示讀卡設備的版本
     servo1.write(angle_disengage);
-    color(255,255,0); //黃色亮
+    color(1,1,0); //黃色亮
 }
 
 void loop() {
@@ -48,7 +48,7 @@ void loop() {
                 pass = false;
                 Serial.println();
                 Serial.println("Denied");
-                color(255,0,0); //紅色亮
+                color(1,0,0); //紅色亮
                 delay(3000);
                 color(0,0,0); //關燈
                 break;
@@ -58,7 +58,7 @@ void loop() {
             servo1.attach(SERVO_PIN);
             Serial.println();
             Serial.println("Opening");
-            color(255,255,0);  //黃色亮
+            color(1,1,0);  //黃色亮
             servo1.write(angle_engage);
             delay(5000);
             servo1.write(angle_disengage);
@@ -68,8 +68,7 @@ void loop() {
     }
 }
 
-void color (unsigned char red, unsigned char green, unsigned char blue)  //顏色控制函數 
-{    
+void color(int red, int green, int blue){
         digitalWrite(R_Pin, red);   
         digitalWrite(G_Pin, green); 
         digitalWrite(B_Pin, blue); 
