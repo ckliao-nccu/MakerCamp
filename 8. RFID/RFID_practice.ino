@@ -6,7 +6,7 @@
 #define LED_BUILTIN     2
 #define RST_PIN         15          
 #define SS_PIN          21  //就是模組上的SDA接腳
-byte uid[]={0x80, 0x3A, 0xFD, 0x22};
+byte uid[]={0x80, 0x3A, 0xFD, 0x22};  //許可的卡號
 //used in authentication
 MFRC522::MIFARE_Key key;
 //authentication return status code

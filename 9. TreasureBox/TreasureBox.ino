@@ -1,12 +1,10 @@
 #include <SPI.h>
 #include <MFRC522.h>
-#include <Servo.h>
+#include <ESP32Servo.h>
 
 #define SERVO_PIN       12  //伺服馬達
 #define RST_PIN         15  //RST
 #define SS_PIN          21  //SDA
-#define LED             2   //內建LED
-#define DEBOUNCE_TIME   50  
 #define R_Pin           33
 #define G_Pin           32
 #define B_Pin           25
@@ -14,12 +12,11 @@
 Servo servo1;  //伺服馬達名稱
 MFRC522 mfrc522(SS_PIN, RST_PIN);   //Defined pins to module RC522
 
-int angle_engage = 30;
+int angle_engage = 20;
 int angle_disengage = 0;
 byte uid[]={0x80, 0x3A, 0xFD, 0x22};  //許可的卡號
 
 void setup() {
-    pinMode(LED, OUTPUT);
     pinMode(R_Pin, OUTPUT);
     pinMode(G_Pin, OUTPUT);
     pinMode(B_Pin, OUTPUT);
@@ -61,11 +58,10 @@ void loop() {
             servo1.attach(SERVO_PIN);
             Serial.println();
             Serial.println("Opening");
-            color(255,255,0); //綠色亮  
+            color(255,255,0);  //黃色亮
             servo1.write(angle_engage);
-            delay(10000);
+            delay(5000);
             servo1.write(angle_disengage);
-            servo1.detach();
         }
         mfrc522.PICC_HaltA();  // instructs the PICC when in the ACTIVE state to go to a "STOP" state
         mfrc522.PCD_StopCrypto1(); //"stop" the encryption of the PCD, it must be called after communication with authentication, otherwise new communications can not be initiated
