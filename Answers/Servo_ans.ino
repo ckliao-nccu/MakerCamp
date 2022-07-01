@@ -13,7 +13,7 @@
 #include <DabbleESP32.h> 
 
 // 參數
-#define SERVO_PIN 12             //定義伺服馬達針腳
+#define SERVO_PIN 12                   //定義伺服馬達針腳
 Servo my_servo;                        //定義伺服馬達名稱
 
 // 設定函式，只會執行一次
@@ -27,7 +27,9 @@ void loop(){
   Dabble.processInput();
   if(Terminal.available() > 0){       
     int angle = Terminal.readNumber();
-    my_servo.write(angle);             //寫入角度給伺服馬達
+    if(angle < 180){
+      my_servo.write(angle);           //寫入角度給伺服馬達
+    }
     Terminal.println(angle);
   }
 }
