@@ -42,9 +42,11 @@ void loop(){
   }
   if(GamePad.isCirclePressed()){
     servo_L.write(30);
+    servo_L.write(0);
   }
   if(GamePad.isCrossPressed()){
     servo_R.write(30);
+    servo_R.write(0);
   }
   int r = GamePad.getRadius();
   int x = static_cast<int>(GamePad.getXaxisData());
@@ -82,19 +84,19 @@ void go(int x, int y, int r){
 // 停止函式
 void stop(){
   Serial.println("Motor stopped");
-  analogWrite(mortor_1A, 0);
-  analogWrite(mortor_1B, 0);
-  analogWrite(mortor_2A, 0);
-  analogWrite(mortor_2B, 0);
+  analogWrite(MOTOR_R1, 0);
+  analogWrite(MOTOR_R2, 0);
+  analogWrite(MOTOR_L1, 0);
+  analogWrite(MOTOR_L2, 0);
 }
 
 // 控制右輪函式
 void R_wheel(bool f_b, int speed){
   if (f_b){
-    digitalWrite(MOTOR_R2, LOW);
+    analogWrite(MOTOR_R2, 0);
     analogWrite(MOTOR_R1, speed);
   } else {
-    digitalWrite(MOTOR_R1, LOW);
+    analogWrite(MOTOR_R1, 0);
     analogWrite(MOTOR_R2, speed);
   }
 }
@@ -102,10 +104,10 @@ void R_wheel(bool f_b, int speed){
 // 控制左輪函式
 void L_wheel(bool f_b, int speed){
   if (f_b){
-    digitalWrite(MOTOR_L1, LOW);
+    analogWrite(MOTOR_L1, 0);
     analogWrite(MOTOR_L2, speed);
   } else {
-    digitalWrite(MOTOR_L2, LOW);
+    analogWrite(MOTOR_L2, 0);
     analogWrite(MOTOR_L1, speed);
   }
 }

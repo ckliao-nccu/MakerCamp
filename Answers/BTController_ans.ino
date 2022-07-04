@@ -57,20 +57,20 @@ void goBack(){
   analogWrite(MOTOR_L2, 0);
 }
 
-// 左轉函式，左馬達逆轉，右馬達正轉
+// 左轉函式，左馬達後退，右馬達前進
 void goLeft(){
-  analogWrite(MOTOR_R1, 200);
-  analogWrite(MOTOR_R2, 0);
-  analogWrite(MOTOR_L1, 0);
-  analogWrite(MOTOR_L2, 200);
-}
-
-// 右轉函式，左馬達正轉，右馬達逆轉
-void goRight(){
   analogWrite(MOTOR_R1, 0);
   analogWrite(MOTOR_R2, 200);
   analogWrite(MOTOR_L1, 200);
   analogWrite(MOTOR_L2, 0);
+}
+
+// 右轉函式，左馬達前進，右馬達後退
+void goRight(){
+  analogWrite(MOTOR_R1, 200);
+  analogWrite(MOTOR_R2, 0);
+  analogWrite(MOTOR_L1, 0);
+  analogWrite(MOTOR_L2, 200);
 }
 
 // 停止函式
